@@ -8,8 +8,12 @@
 namespace App\Models;
 
 
+use Carbon\Carbon;
+
 class Coordinate extends BaseModel
 {
+
+    const DATE_FORMAT_FOR_API = 'd.m.Y H:i:s';
 
     public $timestamps = false;
 
@@ -37,4 +41,17 @@ class Coordinate extends BaseModel
         'direction',
         'precision',
     ];
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $res = parent::toArray();
+        $date = $res['date'];
+        $date = Carbon::createFromFormat($this->getDateFormat(), $date);
+        $res['date'] = $date->format(self::DATE_FORMAT_FOR_API);
+        return $res;
+
+    }
 }

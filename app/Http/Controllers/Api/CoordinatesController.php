@@ -17,7 +17,7 @@ use Illuminate\Validation\Validator;
 class CoordinatesController extends ApiController
 {
 
-    private $dateFormat = 'd.m.Y H:i:s';
+    private $dateFormat = Coordinate::DATE_FORMAT_FOR_API;
 
     public function store(Request $request, CoordinateRepository $coordinateRepository)
     {
